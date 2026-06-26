@@ -1,3 +1,9 @@
+## [1.32.1](https://github.com/PrathxmOp/ytmusic-patches/compare/v1.32.0...v1.32.1) (2026-06-26)
+
+### 🐛 Bug Fixes
+
+* resolve IOException during patch compilation for ListenBrainz settings ([8e1f8cd](https://github.com/PrathxmOp/ytmusic-patches/commit/8e1f8cd4dc446845e29f2c6f5d4c5c5416fa4121))
+
 ## [1.32.0](https://github.com/PrathxmOp/ytmusic-patches/compare/v1.31.0...v1.32.0) (2026-06-26)
 
 ### ✨ New Features
