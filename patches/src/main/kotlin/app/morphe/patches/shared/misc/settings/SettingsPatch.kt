@@ -9,7 +9,6 @@ import app.morphe.patcher.patch.resourcePatch
 import app.morphe.patcher.util.proxy.mutableTypes.MutableMethod.Companion.toMutable
 import app.morphe.patches.all.misc.resources.addAppResources
 import app.morphe.patches.all.misc.resources.addResourcesPatch
-import app.morphe.patches.shared.layout.branding.addLicensePatch
 import app.morphe.patches.shared.misc.settings.preference.BasePreference
 import app.morphe.patches.shared.misc.settings.preference.PreferenceCategory
 import app.morphe.patches.shared.misc.settings.preference.PreferenceScreenPreference
@@ -60,8 +59,7 @@ fun settingsPatch (
 ) = resourcePatch {
     dependsOn(
         addResourcesPatch,
-        settingsColorPatch,
-        addLicensePatch
+        settingsColorPatch
     )
 
     execute {

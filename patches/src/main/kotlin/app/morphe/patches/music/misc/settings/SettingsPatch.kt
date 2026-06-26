@@ -62,14 +62,12 @@ private val settingsResourcePatch = resourcePatch {
             ResourceGroup("drawable",
                 "morphe_settings_screen_00_about.xml",
                 "morphe_settings_screen_00_about_bold.xml",
-                "morphe_settings_screen_01_ads.xml",
-                "morphe_settings_screen_01_ads_bold.xml",
                 "morphe_settings_screen_04_general.xml",
                 "morphe_settings_screen_04_general_bold.xml",
-                "morphe_settings_screen_05_player.xml",
-                "morphe_settings_screen_05_player_bold.xml",
                 "morphe_settings_screen_11_misc.xml",
-                "morphe_settings_screen_11_misc_bold.xml"
+                "morphe_settings_screen_11_misc_bold.xml",
+                "morphe_settings_screen_listenbrainz.xml",
+                "morphe_settings_screen_listenbrainz_bold.xml"
             ),
             ResourceGroup("layout",
                 "morphe_preference_with_icon.xml"
@@ -230,8 +228,8 @@ object PreferenceScreen : BasePreferenceScreen() {
     val LISTENBRAINZ = Screen(
         key = "morphe_settings_music_screen_5_listenbrainz",
         summaryKey = null,
-        icon = "@drawable/morphe_settings_screen_11_misc",
-        iconBold = "@drawable/morphe_settings_screen_11_misc_bold",
+        icon = "@drawable/morphe_settings_screen_listenbrainz",
+        iconBold = "@drawable/morphe_settings_screen_listenbrainz_bold",
         layout = "@layout/morphe_preference_with_icon"
     )
     val MISC = Screen(
