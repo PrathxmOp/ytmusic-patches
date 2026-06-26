@@ -16,6 +16,11 @@ Second \"item\" text"</string>
 -->
 <resources>
     <string name="morphe_settings_title">Prathxm Patches</string>
+    <string name="morphe_settings_search_empty_history_title">No searches yet</string>
+    <string name="morphe_settings_search_empty_history_summary">Your search history is empty for now.</string>
+    <string name="morphe_settings_search_recent_searches">Recent searches</string>
+    <string name="morphe_settings_search_clear_history">Clear search history</string>
+    <string name="morphe_settings_search_tips_title">Search tips</string>
 
     <!-- misc.initialization.initializationPatch -->
     <string name="morphe_restart_first_run">Restart to finish setting up</string>
