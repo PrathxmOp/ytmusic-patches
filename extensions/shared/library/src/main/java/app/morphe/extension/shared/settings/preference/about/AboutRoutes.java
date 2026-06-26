@@ -23,13 +23,13 @@ class AboutRoutes {
     /**
      * Backup icon url if the API call fails.
      */
-    public static volatile String aboutLogoUrl = "https://morphe.software/favicon.svg";
+    public static volatile String aboutLogoUrl = "https://raw.githubusercontent.com/PrathxmOp/ytmusic-patches/main/patches-bundle.png";
 
     /**
      * Links to use if fetch links api call fails.
      */
     private static final List<MorpheAboutPreference.WebLink> NO_CONNECTION_STATIC_LINKS = List.of(
-            new MorpheAboutPreference.WebLink(true, "Website", null, "https://morphe.software"),
+            new MorpheAboutPreference.WebLink(true, "Website", null, "https://github.com/PrathxmOp/ytmusic-patches"),
             CREDITS_LINK
     );
 
@@ -39,8 +39,8 @@ class AboutRoutes {
     private static final String GITHUB_URL = "https://raw.githubusercontent.com";
     private static final Route.CompiledRoute GITHUB_ROUTE_PATCHES = new Route(GET,
             (Utils.isPreReleasePatches()
-                    ? "/MorpheApp/morphe-patches/refs/heads/dev/patches-bundle.json"
-                    : "/MorpheApp/morphe-patches/refs/heads/main/patches-bundle.json")
+                    ? "/PrathxmOp/ytmusic-patches/refs/heads/dev/patches-bundle.json"
+                    : "/PrathxmOp/ytmusic-patches/refs/heads/main/patches-bundle.json")
     ).compile();
 
     @Nullable

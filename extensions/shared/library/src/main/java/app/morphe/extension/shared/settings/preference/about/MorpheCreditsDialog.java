@@ -26,9 +26,9 @@ import app.morphe.extension.shared.ui.Dim;
 class MorpheCreditsDialog extends Dialog {
 
     private static final List<WebLink> WORKS_LINKS_CURRENT = List.of(
-            new WebLink("Morphe",
+            new WebLink("Prathxm Patches",
                     str("morphe_settings_about_links_morphe"),
-                    "https://github.com/morpheapp/morphe-patches/graphs/contributors"
+                    "https://github.com/PrathxmOp/ytmusic-patches/graphs/contributors"
             )
     );
 

@@ -153,7 +153,7 @@ public class MorpheAboutPreference extends Preference {
     }
 
     // Dummy url
-    static final String CREDITS_LINK_PLACEHOLDER_URL = "https://morphe.software/credits/";
+    static final String CREDITS_LINK_PLACEHOLDER_URL = "https://github.com/PrathxmOp/ytmusic-patches/graphs/contributors";
 
     static final WebLink CREDITS_LINK = new WebLink("credits", null, CREDITS_LINK_PLACEHOLDER_URL);
 
@@ -352,7 +352,7 @@ public class MorpheAboutPreference extends Preference {
         }
 
         // App name.
-        html.append("<div class=\"app-name\">Morphe</div>");
+        html.append("<div class=\"app-name\">Prathxm Patches</div>");
 
         String appPatchesVersion = Utils.getPatchesReleaseVersion();
 
