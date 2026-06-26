@@ -19,13 +19,14 @@ import org.w3c.dom.Document
 class ListPreference(
     key: String? = null,
     titleKey: String = "${key}_title",
+    title: String? = null,
     icon: String? = null,
     iconBold: String? = null,
     layout: String? = null,
     tag: String = "app.morphe.extension.shared.settings.preference.CustomDialogListPreference",
     val entriesKey: String? = "${key}_entries",
     val entryValuesKey: String? = "${key}_entry_values"
-) : BasePreference(key, titleKey, null, icon, iconBold, layout, tag) {
+) : BasePreference(key, titleKey, title, null, icon, iconBold, layout, tag) {
     var entries: ArrayResource? = null
         private set
     var entryValues: ArrayResource? = null

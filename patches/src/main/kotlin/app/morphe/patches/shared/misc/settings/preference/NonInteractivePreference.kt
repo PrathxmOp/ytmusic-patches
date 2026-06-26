@@ -19,13 +19,14 @@ import org.w3c.dom.Document
 class NonInteractivePreference(
     key: String,
     titleKey: String = "${key}_title",
+    title: String? = null,
     summaryKey: String? = "${key}_summary",
     icon: String? = null,
     iconBold: String? = null,
     layout: String? = null,
     tag: String = "Preference",
     val selectable: Boolean = false,
-) : BasePreference(key, titleKey, summaryKey, icon, iconBold, layout, tag) {
+) : BasePreference(key, titleKey, title, summaryKey, icon, iconBold, layout, tag) {
     override fun serialize(ownerDocument: Document, resourceCallback: (BaseResource) -> Unit) =
         super.serialize(ownerDocument, resourceCallback).apply {
             setAttribute("android:selectable", selectable.toString())

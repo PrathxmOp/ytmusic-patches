@@ -20,6 +20,7 @@ import org.w3c.dom.Document
 open class PreferenceScreenPreference(
     key: String? = null,
     titleKey: String = "${key}_title",
+    title: String? = null,
     summaryKey: String? = "${key}_summary",
     icon: String? = null,
     iconBold: String? = null,
@@ -33,7 +34,7 @@ open class PreferenceScreenPreference(
     // or adding new attributes to the attrs.xml file.
     // Since the key value is not currently used by the extensions,
     // for now it's much simpler to modify the key to include the sort parameter.
-) : BasePreference(sorting.appendSortType(key), titleKey, summaryKey, icon, iconBold, layout, tag) {
+) : BasePreference(sorting.appendSortType(key), titleKey, title, summaryKey, icon, iconBold, layout, tag) {
     override fun serialize(ownerDocument: Document, resourceCallback: (BaseResource) -> Unit) =
         super.serialize(ownerDocument, resourceCallback).apply {
             preferences.forEach {

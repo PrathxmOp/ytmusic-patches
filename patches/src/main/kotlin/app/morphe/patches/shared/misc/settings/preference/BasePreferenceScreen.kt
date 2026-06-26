@@ -36,6 +36,7 @@ abstract class BasePreferenceScreen(
             return PreferenceScreenPreference(
                 key,
                 titleKey,
+                null,
                 summaryKey,
                 icon,
                 iconBold,
@@ -71,6 +72,7 @@ abstract class BasePreferenceScreen(
                 return PreferenceCategory(
                     key = key,
                     titleKey = titleKey,
+                    title = null,
                     icon = icon,
                     iconBold = iconBold,
                     layout = layout,

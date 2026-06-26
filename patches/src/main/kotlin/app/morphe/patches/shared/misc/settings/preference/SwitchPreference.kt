@@ -14,9 +14,10 @@ package app.morphe.patches.shared.misc.settings.preference
 class SwitchPreference(
     key: String? = null,
     titleKey: String = "${key}_title",
+    title: String? = null,
     summary: Boolean = false,
     tag: String = "SwitchPreference",
     icon: String? = null,
     iconBold: String? = null,
     layout: String? = null
-) : BasePreference(key, titleKey, if (summary) "${key}_summary" else null, icon, iconBold, layout, tag)
+) : BasePreference(key, titleKey, title, if (summary) "${key}_summary" else null, icon, iconBold, layout, tag)

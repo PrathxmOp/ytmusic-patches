@@ -18,13 +18,14 @@ import org.w3c.dom.Document
 open class PreferenceCategory(
     key: String? = null,
     titleKey: String? = if (key == null) null else "${key}_title",
+    title: String? = null,
     icon: String? = null,
     iconBold: String? = null,
     layout: String? = null,
     sorting: Sorting = Sorting.BY_TITLE,
     tag: String = "PreferenceCategory",
     val preferences: Set<BasePreference>
-) : BasePreference(sorting.appendSortType(key), titleKey, null, icon, iconBold, layout, tag) {
+) : BasePreference(sorting.appendSortType(key), titleKey, title, null, icon, iconBold, layout, tag) {
 
     override fun serialize(ownerDocument: Document, resourceCallback: (BaseResource) -> Unit) =
         super.serialize(ownerDocument, resourceCallback).apply {
