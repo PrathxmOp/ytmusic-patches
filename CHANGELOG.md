@@ -1,3 +1,9 @@
+## [1.32.0](https://github.com/PrathxmOp/ytmusic-patches/compare/v1.31.0...v1.32.0) (2026-06-26)
+
+### ✨ New Features
+
+* add ListenBrainz scrobbling ([20bced4](https://github.com/PrathxmOp/ytmusic-patches/commit/20bced41b0bcc8e1cbdcccd6847c8dc6f72abb88))
+
 ## [1.32.0](https://github.com/MorpheApp/morphe-patches/compare/v1.31.0...v1.32.0) (2026-06-23)
 
 ### 🐛 Bug Fixes
