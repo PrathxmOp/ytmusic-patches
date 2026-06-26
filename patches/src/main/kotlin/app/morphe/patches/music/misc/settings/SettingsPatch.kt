@@ -148,6 +148,7 @@ val settingsPatch = bytecodePatch(
             NonInteractivePreference(
                 key = "morphe_music_listenbrainz_token",
                 titleKey = "morphe_music_listenbrainz_token_title",
+                summaryKey = null,
                 tag = "app.morphe.extension.music.settings.preference.ListenBrainzTokenPreference",
                 selectable = true
             ),
@@ -155,16 +156,19 @@ val settingsPatch = bytecodePatch(
             SwitchPreference("morphe_music_listenbrainz_now_playing"),
             NonInteractivePreference(
                 key = "morphe_music_listenbrainz_min_song_duration",
+                summaryKey = null,
                 tag = "app.morphe.extension.shared.settings.preference.SeekBarPreference",
                 selectable = true
             ),
             NonInteractivePreference(
                 key = "morphe_music_listenbrainz_delay_percent",
+                summaryKey = null,
                 tag = "app.morphe.extension.shared.settings.preference.SeekBarPreference",
                 selectable = true
             ),
             NonInteractivePreference(
                 key = "morphe_music_listenbrainz_delay_seconds",
+                summaryKey = null,
                 tag = "app.morphe.extension.shared.settings.preference.SeekBarPreference",
                 selectable = true
             )
