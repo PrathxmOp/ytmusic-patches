@@ -14,6 +14,7 @@ import app.morphe.patches.music.misc.settings.settingsPatch
 import app.morphe.patches.music.shared.Constants.COMPATIBILITY_YOUTUBE_MUSIC
 import com.android.tools.smali.dexlib2.iface.instruction.FiveRegisterInstruction
 
+// ListenBrainz integration patch
 @Suppress("unused")
 val listenBrainzPatch = bytecodePatch(
     name = "ListenBrainz scrobbling",
