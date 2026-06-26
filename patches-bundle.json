@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-06-26T18:35:00",
-  "description": "## [1.33.0](https://github.com/PrathxmOp/ytmusic-patches/compare/v1.32.1...v1.33.0) (2026-06-26)\n\n### ✨ Features\n\n* Remove unused patches, keep only ListenBrainz scrobbling\n* Rebrand to Prathxm Patches",
-  "download_url": "https://github.com/PrathxmOp/ytmusic-patches/releases/download/v1.33.0/patches-1.33.0.mpp",
+  "created_at": "2026-06-26T16:43:00",
+  "description": "## [1.32.1](https://github.com/PrathxmOp/ytmusic-patches/compare/v1.32.0...v1.32.1) (2026-06-26)\n\n### 🐛 Bug Fixes\n\n* resolve IOException during patch compilation for ListenBrainz settings ([8e1f8cd](https://github.com/PrathxmOp/ytmusic-patches/commit/8e1f8cd4dc446845e29f2c6f5d4c5c5416fa4121))",
+  "download_url": "https://github.com/PrathxmOp/ytmusic-patches/releases/download/v1.32.1/patches-1.32.1.mpp",
   "signature_download_url": "",
-  "version": "1.33.0"
+  "version": "1.32.1"
 }
