@@ -1,4 +1,6 @@
-fun String?.nullIfBlankOrDummy() = this?.takeIf { it.isNotBlank() && it.lowercase() != "dummy" }
+val normalizeCredentials: (String?) -> String? = { value ->
+    value?.takeIf { it.isNotBlank() && it.lowercase() != "dummy" }
+}
 
 rootProject.name = "morphe-patches"
 
@@ -11,15 +13,15 @@ pluginManagement {
             name = "GitHubPackages"
             url = uri("https://maven.pkg.github.com/MorpheApp/registry")
             credentials {
-                username = System.getenv("ORG_GRADLE_PROJECT_gpr_user").nullIfBlankOrDummy()
-                    ?: System.getenv("GPR_USER").nullIfBlankOrDummy()
-                    ?: providers.gradleProperty("gpr.user").orNull.nullIfBlankOrDummy()
-                    ?: System.getenv("GITHUB_ACTOR").nullIfBlankOrDummy()
+                username = normalizeCredentials(System.getenv("ORG_GRADLE_PROJECT_gpr_user"))
+                    ?: normalizeCredentials(System.getenv("GPR_USER"))
+                    ?: normalizeCredentials(providers.gradleProperty("gpr.user").orNull)
+                    ?: normalizeCredentials(System.getenv("GITHUB_ACTOR"))
                     ?: ""
-                password = System.getenv("ORG_GRADLE_PROJECT_gpr_key").nullIfBlankOrDummy()
-                    ?: System.getenv("GPR_KEY").nullIfBlankOrDummy()
-                    ?: providers.gradleProperty("gpr.key").orNull.nullIfBlankOrDummy()
-                    ?: System.getenv("GITHUB_TOKEN").nullIfBlankOrDummy()
+                password = normalizeCredentials(System.getenv("ORG_GRADLE_PROJECT_gpr_key"))
+                    ?: normalizeCredentials(System.getenv("GPR_KEY"))
+                    ?: normalizeCredentials(providers.gradleProperty("gpr.key").orNull)
+                    ?: normalizeCredentials(System.getenv("GITHUB_TOKEN"))
                     ?: ""
             }
         }
