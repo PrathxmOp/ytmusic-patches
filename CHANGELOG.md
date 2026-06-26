@@ -1,3 +1,10 @@
+## [1.33.1](https://github.com/PrathxmOp/ytmusic-patches/compare/v1.33.0...v1.33.1) (2026-06-26)
+
+### 🐛 Bug Fixes
+
+* update preference constructors for literal title support and compile cleanly ([b336604](https://github.com/PrathxmOp/ytmusic-patches/commit/b33660497ced22f6f1063e465ee1fbd1fcfe4437))
+* use literal title for settings header preference to avoid missing resource crash ([aab2adf](https://github.com/PrathxmOp/ytmusic-patches/commit/aab2adf9c880ca7f47e4fa49e6ebca59fc959ba5))
+
 ## [1.33.0](https://github.com/PrathxmOp/ytmusic-patches/compare/v1.32.1...v1.33.0) (2026-06-26)
 
 ### 🐛 Bug Fixes
