@@ -21,6 +21,9 @@ jobs:
       attestations: write
       actions: write
     runs-on: ubuntu-latest
+    env:
+      ORG_GRADLE_PROJECT_gpr_user: ${{ github.actor }}
+      ORG_GRADLE_PROJECT_gpr_key: ${{ secrets.GPR_KEY }}
     steps:
       - name: Checkout
         uses: actions/checkout@v6
