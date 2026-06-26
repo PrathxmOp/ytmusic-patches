@@ -1,7 +1,3 @@
-val normalizeCredentials: (String?) -> String? = { value ->
-    value?.takeIf { it.isNotBlank() && it.lowercase() != "dummy" }
-}
-
 rootProject.name = "morphe-patches"
 
 pluginManagement {
@@ -13,15 +9,23 @@ pluginManagement {
             name = "GitHubPackages"
             url = uri("https://maven.pkg.github.com/MorpheApp/registry")
             credentials {
-                username = normalizeCredentials(System.getenv("ORG_GRADLE_PROJECT_gpr_user"))
-                    ?: normalizeCredentials(System.getenv("GPR_USER"))
-                    ?: normalizeCredentials(providers.gradleProperty("gpr.user").orNull)
-                    ?: normalizeCredentials(System.getenv("GITHUB_ACTOR"))
+                username = System.getenv("ORG_GRADLE_PROJECT_gpr_user")
+                    ?.takeIf { it.isNotBlank() && it.lowercase() != "dummy" }
+                    ?: System.getenv("GPR_USER")
+                        ?.takeIf { it.isNotBlank() && it.lowercase() != "dummy" }
+                    ?: providers.gradleProperty("gpr.user").orNull
+                        ?.takeIf { it.isNotBlank() && it.lowercase() != "dummy" }
+                    ?: System.getenv("GITHUB_ACTOR")
+                        ?.takeIf { it.isNotBlank() && it.lowercase() != "dummy" }
                     ?: ""
-                password = normalizeCredentials(System.getenv("ORG_GRADLE_PROJECT_gpr_key"))
-                    ?: normalizeCredentials(System.getenv("GPR_KEY"))
-                    ?: normalizeCredentials(providers.gradleProperty("gpr.key").orNull)
-                    ?: normalizeCredentials(System.getenv("GITHUB_TOKEN"))
+                password = System.getenv("ORG_GRADLE_PROJECT_gpr_key")
+                    ?.takeIf { it.isNotBlank() && it.lowercase() != "dummy" }
+                    ?: System.getenv("GPR_KEY")
+                        ?.takeIf { it.isNotBlank() && it.lowercase() != "dummy" }
+                    ?: providers.gradleProperty("gpr.key").orNull
+                        ?.takeIf { it.isNotBlank() && it.lowercase() != "dummy" }
+                    ?: System.getenv("GITHUB_TOKEN")
+                        ?.takeIf { it.isNotBlank() && it.lowercase() != "dummy" }
                     ?: ""
             }
         }
