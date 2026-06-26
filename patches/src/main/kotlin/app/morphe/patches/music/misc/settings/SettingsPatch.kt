@@ -47,7 +47,7 @@ private val settingsResourcePatch = resourcePatch {
         settingsPatch(
             rootPreferences = listOf(
                 IntentPreference(
-                    titleKey = "morphe_settings_title",
+                    title = "Prathxm Patches",
                     summaryKey = null,
                     intent = newIntent(MORPHE_SETTINGS_INTENT),
                 ) to "settings_headers"

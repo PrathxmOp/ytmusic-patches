@@ -18,6 +18,7 @@ import org.w3c.dom.Element
 abstract class BasePreference(
     val key: String? = null,
     val titleKey: String? = "${key}_title",
+    val title: String? = null,
     val summaryKey: String? = "${key}_summary",
     icon: String? = null,
     iconBold: String? = null,
@@ -46,7 +47,11 @@ abstract class BasePreference(
     open fun serialize(ownerDocument: Document, resourceCallback: (BaseResource) -> Unit): Element =
         ownerDocument.createElement(tag).apply {
             key?.let { setAttribute("android:key", it) }
-            titleKey?.let { setAttribute("android:title", "@string/$it") }
+            if (title != null) {
+                setAttribute("android:title", title)
+            } else {
+                titleKey?.let { setAttribute("android:title", "@string/$it") }
+            }
             summaryKey?.let { setAttribute("android:summary", "@string/$it") }
 
             if (icon != null || iconBold != null) {
