@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-06-26T19:41:56",
-  "description": "## [1.33.1](https://github.com/PrathxmOp/ytmusic-patches/compare/v1.33.0...v1.33.1) (2026-06-26)\n\n### 🐛 Bug Fixes\n\n* update preference constructors for literal title support and compile cleanly ([b336604](https://github.com/PrathxmOp/ytmusic-patches/commit/b33660497ced22f6f1063e465ee1fbd1fcfe4437))\n* use literal title for settings header preference to avoid missing resource crash ([aab2adf](https://github.com/PrathxmOp/ytmusic-patches/commit/aab2adf9c880ca7f47e4fa49e6ebca59fc959ba5))",
-  "download_url": "https://github.com/PrathxmOp/ytmusic-patches/releases/download/v1.33.1/patches-1.33.1.mpp",
+  "created_at": "2026-06-26T19:48:41",
+  "description": "## [1.33.2](https://github.com/PrathxmOp/ytmusic-patches/compare/v1.33.1...v1.33.2) (2026-06-26)\n\n### 🐛 Bug Fixes\n\n* add missing shared-youtube strings for settings search history UI ([20f3532](https://github.com/PrathxmOp/ytmusic-patches/commit/20f3532c17133cc517b3f862f207c6d0f56d7b91))",
+  "download_url": "https://github.com/PrathxmOp/ytmusic-patches/releases/download/v1.33.2/patches-1.33.2.mpp",
   "signature_download_url": "",
-  "version": "1.33.1"
+  "version": "1.33.2"
 }

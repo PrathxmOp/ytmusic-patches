@@ -1,3 +1,9 @@
+## [1.33.2](https://github.com/PrathxmOp/ytmusic-patches/compare/v1.33.1...v1.33.2) (2026-06-26)
+
+### 🐛 Bug Fixes
+
+* add missing shared-youtube strings for settings search history UI ([20f3532](https://github.com/PrathxmOp/ytmusic-patches/commit/20f3532c17133cc517b3f862f207c6d0f56d7b91))
+
 ## [1.33.1](https://github.com/PrathxmOp/ytmusic-patches/compare/v1.33.0...v1.33.1) (2026-06-26)
 
 ### 🐛 Bug Fixes
