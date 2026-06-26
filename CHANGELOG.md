@@ -1,3 +1,17 @@
+## [1.33.0](https://github.com/PrathxmOp/ytmusic-patches/compare/v1.32.1...v1.33.0) (2026-06-26)
+
+### 🐛 Bug Fixes
+
+* fix build errors and add ListenBrainz icon ([ff8ea92](https://github.com/PrathxmOp/ytmusic-patches/commit/ff8ea92b897b7263ee7e9e88069538dedd64145b))
+* ignore blank/dummy GitHub Packages auth values in settings.gradle.kts ([a451091](https://github.com/PrathxmOp/ytmusic-patches/commit/a451091e4bc5e6d30e8042a7a9b42a08deeb82a3))
+* normalize GitHub Packages auth values in settings.gradle.kts ([84f5cda](https://github.com/PrathxmOp/ytmusic-patches/commit/84f5cda00d17ed425a7d83458a72e358d76a1b23))
+* resolve GitHub Packages credential normalization in settings.gradle.kts ([37b04a7](https://github.com/PrathxmOp/ytmusic-patches/commit/37b04a7ba17dff81f155a7d8567453dc4122590e))
+* update CI GPR authentication priority and rebrand settings to Prathxm Patches ([79a76a5](https://github.com/PrathxmOp/ytmusic-patches/commit/79a76a5f85b17167e098df496cdbdf68c43966a3))
+
+### ✨ New Features
+
+* remove unused patches, keep only ListenBrainz scrobbling ([f97716d](https://github.com/PrathxmOp/ytmusic-patches/commit/f97716d871b5c8f686a6ac4054f3d32943c61477))
+
 ## [1.32.1](https://github.com/PrathxmOp/ytmusic-patches/compare/v1.32.0...v1.32.1) (2026-06-26)
 
 ### 🐛 Bug Fixes
