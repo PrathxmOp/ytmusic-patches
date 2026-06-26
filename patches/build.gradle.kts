@@ -2,12 +2,12 @@ group = "app.morphe"
 
 patches {
     about {
-        name = "Morphe Patches"
-        description = "Patches for Morphe"
-        source = "git@github.com:MorpheApp/morphe-patches.git"
-        author = "MorpheApp"
+        name = "Prathxm Patches"
+        description = "ListenBrainz scrobbling and more patches for YouTube Music"
+        source = "https://github.com/PrathxmOp/ytmusic-patches"
+        author = "Prathxm"
         contact = "na"
-        website = "https://morphe.software"
+        website = "https://github.com/PrathxmOp/ytmusic-patches"
         license = "GNU General Public License v3.0, with additional GPL section 7 requirements"
     }
 }

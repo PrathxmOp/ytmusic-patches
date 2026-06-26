@@ -12,7 +12,7 @@ import app.morphe.patches.all.misc.resources.setAddResourceLocale
 import app.morphe.patches.all.misc.updates.checkPatcherUpToDatePatch
 import app.morphe.patches.music.misc.extension.hooks.youTubeMusicApplicationInitOnCreateHook
 import app.morphe.patches.music.misc.extension.sharedExtensionPatch
-import app.morphe.patches.music.misc.gms.Constants.MUSIC_PACKAGE_NAME
+import app.morphe.patches.music.shared.Constants.MUSIC_PACKAGE_NAME
 import app.morphe.patches.music.misc.playservice.is_8_40_or_greater
 import app.morphe.patches.music.misc.playservice.versionCheckPatch
 import app.morphe.patches.music.shared.Constants.COMPATIBILITY_YOUTUBE_MUSIC
@@ -218,13 +218,7 @@ fun newIntent(settingsName: String) = IntentPreference.Intent(
 }
 
 object PreferenceScreen : BasePreferenceScreen() {
-    val ADS = Screen(
-        key = "morphe_settings_music_screen_1_ads",
-        summaryKey = null,
-        icon = "@drawable/morphe_settings_screen_01_ads",
-        iconBold = "@drawable/morphe_settings_screen_01_ads_bold",
-        layout = "@layout/morphe_preference_with_icon"
-    )
+
     val GENERAL = Screen(
         key = "morphe_settings_music_screen_2_general",
         summaryKey = null,
@@ -232,13 +226,7 @@ object PreferenceScreen : BasePreferenceScreen() {
         iconBold = "@drawable/morphe_settings_screen_04_general_bold",
         layout = "@layout/morphe_preference_with_icon"
     )
-    val PLAYER = Screen(
-        key = "morphe_settings_music_screen_3_player",
-        summaryKey = null,
-        icon = "@drawable/morphe_settings_screen_05_player",
-        iconBold = "@drawable/morphe_settings_screen_05_player_bold",
-        layout = "@layout/morphe_preference_with_icon"
-    )
+
     val LISTENBRAINZ = Screen(
         key = "morphe_settings_music_screen_5_listenbrainz",
         summaryKey = null,
