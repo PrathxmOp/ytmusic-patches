@@ -1,3 +1,5 @@
+fun String?.nullIfBlankOrDummy() = this?.takeIf { it.isNotBlank() && it.lowercase() != "dummy" }
+
 rootProject.name = "morphe-patches"
 
 pluginManagement {
@@ -9,15 +11,15 @@ pluginManagement {
             name = "GitHubPackages"
             url = uri("https://maven.pkg.github.com/MorpheApp/registry")
             credentials {
-                username = System.getenv("ORG_GRADLE_PROJECT_gpr_user")
-                    ?: System.getenv("GPR_USER")
-                    ?: providers.gradleProperty("gpr.user").orNull
-                    ?: System.getenv("GITHUB_ACTOR")
+                username = System.getenv("ORG_GRADLE_PROJECT_gpr_user").nullIfBlankOrDummy()
+                    ?: System.getenv("GPR_USER").nullIfBlankOrDummy()
+                    ?: providers.gradleProperty("gpr.user").orNull.nullIfBlankOrDummy()
+                    ?: System.getenv("GITHUB_ACTOR").nullIfBlankOrDummy()
                     ?: ""
-                password = System.getenv("ORG_GRADLE_PROJECT_gpr_key")
-                    ?: System.getenv("GPR_KEY")
-                    ?: providers.gradleProperty("gpr.key").orNull
-                    ?: System.getenv("GITHUB_TOKEN")
+                password = System.getenv("ORG_GRADLE_PROJECT_gpr_key").nullIfBlankOrDummy()
+                    ?: System.getenv("GPR_KEY").nullIfBlankOrDummy()
+                    ?: providers.gradleProperty("gpr.key").orNull.nullIfBlankOrDummy()
+                    ?: System.getenv("GITHUB_TOKEN").nullIfBlankOrDummy()
                     ?: ""
             }
         }
