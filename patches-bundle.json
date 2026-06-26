@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-06-26T19:48:41",
-  "description": "## [1.33.2](https://github.com/PrathxmOp/ytmusic-patches/compare/v1.33.1...v1.33.2) (2026-06-26)\n\n### 🐛 Bug Fixes\n\n* add missing shared-youtube strings for settings search history UI ([20f3532](https://github.com/PrathxmOp/ytmusic-patches/commit/20f3532c17133cc517b3f862f207c6d0f56d7b91))",
-  "download_url": "https://github.com/PrathxmOp/ytmusic-patches/releases/download/v1.33.2/patches-1.33.2.mpp",
+  "created_at": "2026-06-26T20:16:24",
+  "description": "## [1.33.3](https://github.com/PrathxmOp/ytmusic-patches/compare/v1.33.2...v1.33.3) (2026-06-26)\n\n### 🐛 Bug Fixes\n\n* restore missing shared settings resource strings ([c4cd2da](https://github.com/PrathxmOp/ytmusic-patches/commit/c4cd2da355debeface2dd1ed0d5e5cea7a40a849))",
+  "download_url": "https://github.com/PrathxmOp/ytmusic-patches/releases/download/v1.33.3/patches-1.33.3.mpp",
   "signature_download_url": "",
-  "version": "1.33.2"
+  "version": "1.33.3"
 }

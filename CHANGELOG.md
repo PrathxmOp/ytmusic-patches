@@ -1,3 +1,9 @@
+## [1.33.3](https://github.com/PrathxmOp/ytmusic-patches/compare/v1.33.2...v1.33.3) (2026-06-26)
+
+### 🐛 Bug Fixes
+
+* restore missing shared settings resource strings ([c4cd2da](https://github.com/PrathxmOp/ytmusic-patches/commit/c4cd2da355debeface2dd1ed0d5e5cea7a40a849))
+
 ## [1.33.2](https://github.com/PrathxmOp/ytmusic-patches/compare/v1.33.1...v1.33.2) (2026-06-26)
 
 ### 🐛 Bug Fixes
