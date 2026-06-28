@@ -232,8 +232,17 @@ fun newIntent(settingsName: String) = IntentPreference.Intent(
     targetClass = "com.google.android.gms.common.api.GoogleApiActivity"
 ) {
     // The package name change has to be reflected in the intent.
-    setOrGetFallbackPackageName(MUSIC_PACKAGE_NAME)
+    // Try to get the package name from the main morphe-patches classloader.
+    try {
+        val siblingClass = Class.forName("app.morphe.patches.music.shared.Constants")
+        val clazz = siblingClass.classLoader.loadClass("app.morphe.patches.all.misc.packagename.ChangePackageNamePatchKt")
+        val method = clazz.getMethod("setOrGetFallbackPackageName", String::class.java)
+        method.invoke(null, MUSIC_PACKAGE_NAME) as String
+    } catch (e: Throwable) {
+        setOrGetFallbackPackageName(MUSIC_PACKAGE_NAME)
+    }
 }
+
 
 object PreferenceScreen : BasePreferenceScreen() {
 
