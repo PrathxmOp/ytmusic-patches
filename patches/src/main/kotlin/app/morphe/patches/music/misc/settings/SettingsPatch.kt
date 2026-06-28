@@ -1,5 +1,8 @@
 package app.morphe.patches.music.misc.settings
 
+import app.morphe.patcher.extensions.InstructionExtensions.addInstruction
+import app.morphe.util.findMutableMethodOf
+import com.android.tools.smali.dexlib2.iface.ClassDef
 import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patcher.patch.resourcePatch
 import app.morphe.patches.all.misc.fix.openurllinks.removeLinkVerification
@@ -202,19 +205,35 @@ val settingsPatch = bytecodePatch(
             )
         )
 
-        modifyActivityForSettingsInjection(
-            GoogleApiActivityOnCreateFingerprint,
-            MUSIC_ACTIVITY_HOOK_CLASS,
-            true
-        )
+        var mainActivityHookClassDef: ClassDef? = null
+        classDefForEach { classDef ->
+            if (classDef.type == "Lapp/morphe/extension/music/settings/MusicActivityHook;") {
+                mainActivityHookClassDef = classDef
+            }
+        }
 
-        // TODO: Implement a 'Spoof app version' patch for YouTube Music.
-        if (is_8_40_or_greater) {
-            BoldIconsFeatureFlagFingerprint.let {
-                it.method.insertLiteralOverride(
-                    it.instructionMatches.first().index,
-                    "$MUSIC_ACTIVITY_HOOK_CLASS->useBoldIcons(Z)Z"
-                )
+        if (mainActivityHookClassDef != null) {
+            val mutableClass = mutableClassDefBy(mainActivityHookClassDef!!)
+            val method = mainActivityHookClassDef!!.methods.firstOrNull { it.name == "initialize" }
+            if (method != null) {
+                val mutableMethod = mutableClass.findMutableMethodOf(method)
+                mutableMethod.addInstruction(0, "const-class v0, Lapp/morphe/extension/prathxmpatches/settings/Settings;")
+            }
+        } else {
+            modifyActivityForSettingsInjection(
+                GoogleApiActivityOnCreateFingerprint,
+                MUSIC_ACTIVITY_HOOK_CLASS,
+                true
+            )
+
+            // TODO: Implement a 'Spoof app version' patch for YouTube Music.
+            if (is_8_40_or_greater) {
+                BoldIconsFeatureFlagFingerprint.let {
+                    it.method.insertLiteralOverride(
+                        it.instructionMatches.first().index,
+                        "$MUSIC_ACTIVITY_HOOK_CLASS->useBoldIcons(Z)Z"
+                    )
+                }
             }
         }
     }
