@@ -11,8 +11,8 @@ import app.morphe.patcher.extensions.InstructionExtensions.addInstruction
 import app.morphe.patcher.extensions.InstructionExtensions.getInstruction
 import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patches.music.misc.extension.sharedExtensionPatch
-import app.morphe.patches.music.misc.settings.PreferenceScreen
-import app.morphe.patches.music.misc.settings.settingsPatch
+import app.morphe.patches.music.misc.settings.prathxm.PreferenceScreen
+import app.morphe.patches.music.misc.settings.prathxm.prathxmSettingsPatch
 import app.morphe.patches.music.misc.settings.manifest.ytMusicSettingsManifestPatch
 import app.morphe.patches.music.shared.Constants.COMPATIBILITY_YOUTUBE_MUSIC
 import app.morphe.patches.shared.misc.settings.preference.NonInteractivePreference
@@ -79,18 +79,18 @@ val discordRpcPatch = bytecodePatch(
 ) {
     dependsOn(
         sharedExtensionPatch,
-        settingsPatch,
+        prathxmSettingsPatch,
         ytMusicSettingsManifestPatch
     )
 
     compatibleWith(COMPATIBILITY_YOUTUBE_MUSIC)
 
     execute {
-        val isMainRepoDiscordPresent = try {
-            Class.forName("app.morphe.extension.music.discord.DiscordPatch")
-            true
-        } catch (e: ClassNotFoundException) {
-            false
+        var isMainRepoDiscordPresent = false
+        classDefForEach { classDef ->
+            if (classDef.type == "Lapp/morphe/extension/music/discord/DiscordPatch;") {
+                isMainRepoDiscordPresent = true
+            }
         }
         if (isMainRepoDiscordPresent) {
             return@execute

@@ -1,5 +1,6 @@
 package app.morphe.extension.prathxmpatches.discord
 
+
 import android.media.MediaMetadata as AndroidMediaMetadata
 import android.media.session.PlaybackState
 import app.morphe.extension.prathxmpatches.settings.Settings

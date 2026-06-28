@@ -11,24 +11,19 @@ import app.morphe.patcher.extensions.InstructionExtensions.addInstruction
 import app.morphe.patcher.extensions.InstructionExtensions.addInstructions
 import app.morphe.patcher.extensions.InstructionExtensions.getInstruction
 import app.morphe.patcher.patch.bytecodePatch
-import app.morphe.patcher.patch.resourcePatch
 import app.morphe.patches.music.misc.extension.sharedExtensionPatch
-import app.morphe.patches.music.misc.settings.PreferenceScreen
-import app.morphe.patches.music.misc.settings.settingsPatch
+import app.morphe.patches.music.misc.settings.prathxm.PreferenceScreen
+import app.morphe.patches.music.misc.settings.prathxm.prathxmSettingsPatch
 import app.morphe.patches.music.misc.settings.manifest.ytMusicSettingsManifestPatch
 import app.morphe.patches.music.shared.Constants.COMPATIBILITY_YOUTUBE_MUSIC
 import app.morphe.patches.shared.misc.settings.preference.NonInteractivePreference
 import app.morphe.patches.shared.misc.settings.preference.PreferenceCategory
-import app.morphe.patches.shared.misc.settings.preference.PreferenceScreenPreference
-import app.morphe.patches.shared.misc.settings.preference.PreferenceScreenPreference.Sorting
 import app.morphe.patches.shared.misc.settings.preference.SwitchPreference
 import app.morphe.patches.shared.misc.settings.preference.TextPreference
 import app.morphe.patches.youtube.layout.returnyoutubedislike.DislikeFingerprint
 import app.morphe.patches.youtube.layout.returnyoutubedislike.EndpointServiceNameFingerprint
 import app.morphe.patches.youtube.layout.returnyoutubedislike.likeEndpointParserFingerprint
 import app.morphe.patches.youtube.layout.returnyoutubedislike.requestParameterCheckFingerprint
-import app.morphe.util.ResourceGroup
-import app.morphe.util.copyResources
 import app.morphe.util.getFreeRegisterProvider
 import app.morphe.util.getReference
 import com.android.tools.smali.dexlib2.iface.instruction.FiveRegisterInstruction
@@ -44,18 +39,18 @@ val scrobblingPatch = bytecodePatch(
 ) {
     dependsOn(
         sharedExtensionPatch,
-        settingsPatch,
+        prathxmSettingsPatch,
         ytMusicSettingsManifestPatch
     )
 
     compatibleWith(COMPATIBILITY_YOUTUBE_MUSIC)
 
     execute {
-        val isMainRepoScrobblePresent = try {
-            Class.forName("app.morphe.extension.music.patches.scrobbling.ScrobblePatch")
-            true
-        } catch (e: ClassNotFoundException) {
-            false
+        var isMainRepoScrobblePresent = false
+        classDefForEach { classDef ->
+            if (classDef.type == "Lapp/morphe/extension/music/patches/scrobbling/ScrobblePatch;") {
+                isMainRepoScrobblePresent = true
+            }
         }
         if (isMainRepoScrobblePresent) {
             return@execute

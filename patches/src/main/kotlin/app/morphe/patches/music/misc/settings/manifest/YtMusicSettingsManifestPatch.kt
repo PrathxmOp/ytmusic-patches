@@ -11,8 +11,6 @@ import app.morphe.patcher.patch.resourcePatch
 import org.w3c.dom.Element
 
 val ytMusicSettingsManifestPatch = resourcePatch {
-    name = "YouTube Music Settings Manifest Patch"
-    description = "Registers GoogleApiActivity in the manifest if missing."
     execute {
         document("AndroidManifest.xml").use { document ->
             val application = document.getElementsByTagName("application").item(0) as Element

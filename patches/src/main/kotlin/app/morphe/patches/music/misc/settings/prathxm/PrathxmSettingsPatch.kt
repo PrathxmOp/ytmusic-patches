@@ -1,4 +1,4 @@
-package app.morphe.patches.music.misc.settings
+package app.morphe.patches.music.misc.settings.prathxm
 
 import app.morphe.patcher.extensions.InstructionExtensions.addInstruction
 import app.morphe.util.findMutableMethodOf
@@ -29,36 +29,45 @@ import app.morphe.patches.shared.misc.settings.preference.BasePreferenceScreen
 import app.morphe.patches.shared.misc.settings.preference.InputType
 import app.morphe.patches.shared.misc.settings.preference.IntentPreference
 import app.morphe.patches.shared.misc.settings.preference.NonInteractivePreference
+import app.morphe.patches.shared.misc.settings.preference.PreferenceCategory
 import app.morphe.patches.shared.misc.settings.preference.PreferenceScreenPreference
 import app.morphe.patches.shared.misc.settings.preference.PreferenceScreenPreference.Sorting
 import app.morphe.patches.shared.misc.settings.preference.SwitchPreference
 import app.morphe.patches.shared.misc.settings.preference.TextPreference
-import app.morphe.patches.shared.misc.settings.settingsPatch
 import app.morphe.patches.shared.misc.settings.modifyActivityForSettingsInjection
 import app.morphe.util.ResourceGroup
 import app.morphe.util.copyResources
 import app.morphe.util.copyXmlNode
+import app.morphe.util.getNode
 import app.morphe.util.inputStreamFromBundledResource
+import app.morphe.util.insertFirst
 import app.morphe.util.insertLiteralOverride
 import org.w3c.dom.Element
+import org.w3c.dom.Node
 
 private const val MUSIC_ACTIVITY_HOOK_CLASS = "Lapp/morphe/extension/prathxmpatches/settings/MusicActivityHook;"
 
 private val preferences = mutableSetOf<BasePreference>()
 
-private val settingsResourcePatch = resourcePatch {
+private var isMainRepoPresent = false
+private var isMainRepoScrobblingPresent = false
+
+val prathxmSettingsResourcePatch = resourcePatch {
     dependsOn(
         resourceMappingPatch,
-        settingsPatch(
-            rootPreferences = listOf(
-                IntentPreference(
-                    title = "Prathxm Patches",
-                    summaryKey = null,
-                    intent = newIntent(MORPHE_SETTINGS_INTENT),
-                ) to "settings_headers"
-            ),
-            preferences = preferences
-        )
+        addResourcesPatch,
+        bytecodePatch {
+            execute {
+                classDefForEach { classDef ->
+                    if (classDef.type == "Lapp/morphe/extension/music/settings/MusicActivityHook;") {
+                        isMainRepoPresent = true
+                    }
+                    if (classDef.type == "Lapp/morphe/extension/music/patches/scrobbling/ScrobblePatch;") {
+                        isMainRepoScrobblingPresent = true
+                    }
+                }
+            }
+        }
     )
 
     execute {
@@ -84,17 +93,52 @@ private val settingsResourcePatch = resourcePatch {
             }
         }
 
-        // 2. Check if the main repository already includes the Discord/Scrobble patches
-        val isMainRepoDiscordPresent = try {
-            Class.forName("app.morphe.extension.music.discord.DiscordPatch")
-            true
-        } catch (e: ClassNotFoundException) {
-            false
-        }
-        if (isMainRepoDiscordPresent) {
-            return@execute
+        if (!isMainRepoPresent) {
+            // Standalone mode: we copy the base files
+            addAppResources("shared")
+
+            copyResources(
+                "settings",
+                ResourceGroup("xml",
+                    "morphe_prefs.xml",
+                    "morphe_prefs_icons.xml",
+                    "morphe_prefs_icons_bold.xml"
+                ),
+                ResourceGroup("menu",
+                    "morphe_search_menu.xml"
+                ),
+                ResourceGroup("drawable",
+                    "morphe_ic_dialog_alert.xml",
+                    "morphe_settings_arrow_time.xml",
+                    "morphe_settings_arrow_time_bold.xml",
+                    "morphe_settings_custom_checkmark.xml",
+                    "morphe_settings_custom_checkmark_bold.xml",
+                    "morphe_settings_search_icon.xml",
+                    "morphe_settings_search_icon_bold.xml",
+                    "morphe_settings_search_remove.xml",
+                    "morphe_settings_search_remove_bold.xml",
+                    "morphe_settings_toolbar_arrow_left.xml",
+                    "morphe_settings_toolbar_arrow_left_bold.xml",
+                ),
+                ResourceGroup("layout",
+                    "morphe_custom_list_item_checked.xml",
+                    "morphe_icon_list_item.xml",
+                    "morphe_color_dot_widget.xml",
+                    "morphe_color_picker.xml",
+                    "morphe_preference_search_history_item.xml",
+                    "morphe_preference_search_history_screen.xml",
+                    "morphe_preference_search_no_result.xml",
+                    "morphe_preference_search_result_color.xml",
+                    "morphe_preference_search_result_group_header.xml",
+                    "morphe_preference_search_result_list.xml",
+                    "morphe_preference_search_result_regular.xml",
+                    "morphe_preference_search_result_switch.xml",
+                    "morphe_settings_with_toolbar.xml"
+                )
+            )
         }
 
+        // Always copy our addon's drawables & layouts
         copyResources(
             "settings",
             ResourceGroup("drawable",
@@ -187,6 +231,84 @@ private val settingsResourcePatch = resourcePatch {
 
     finalize {
         val packageName = document("AndroidManifest.xml").use { it.documentElement.getAttribute("package") }
+        
+        fun Node.addPreference(preference: BasePreference) {
+            preference.serialize(ownerDocument) { _ ->
+            }.let { preferenceNode ->
+                insertFirst(preferenceNode)
+            }
+        }
+
+        fun removeIconsAndLayout(preferences: Collection<BasePreference>, removeAllIconsAndLayout: Boolean) {
+            preferences.forEach { preference ->
+                preference.icon = null
+                if (removeAllIconsAndLayout) {
+                    preference.iconBold = null
+                    preference.layout = null
+                }
+
+                if (preference is PreferenceCategory) {
+                    removeIconsAndLayout(preference.preferences, removeAllIconsAndLayout)
+                } else if (preference is PreferenceScreenPreference) {
+                    removeIconsAndLayout(preference.preferences, removeAllIconsAndLayout)
+                }
+            }
+        }
+
+        if (!isMainRepoPresent) {
+            // Standalone mode: we create a "Prathxm Patches" header in settings_headers.xml
+            val headerPreference = IntentPreference(
+                title = "Prathxm Patches",
+                summaryKey = null,
+                intent = newIntent(MORPHE_SETTINGS_INTENT),
+            )
+            
+            val preferenceFileName = "res/xml/settings_headers.xml"
+            if (get(preferenceFileName).exists()) {
+                document(preferenceFileName).use { document ->
+                    document.getNode("PreferenceScreen").addPreference(headerPreference)
+                }
+            }
+
+            // Write all preferences to clean XMLs
+            document("res/xml/morphe_prefs_icons.xml").use { document ->
+                val morphePreferenceScreenNode = document.getNode("PreferenceScreen")
+                preferences.forEach { morphePreferenceScreenNode.addPreference(it) }
+            }
+
+            removeIconsAndLayout(preferences, false)
+            document("res/xml/morphe_prefs_icons_bold.xml").use { document ->
+                val morphePreferenceScreenNode = document.getNode("PreferenceScreen")
+                preferences.forEach { morphePreferenceScreenNode.addPreference(it) }
+            }
+
+            removeIconsAndLayout(preferences, true)
+            document("res/xml/morphe_prefs.xml").use { document ->
+                val morphePreferenceScreenNode = document.getNode("PreferenceScreen")
+                preferences.forEach { morphePreferenceScreenNode.addPreference(it) }
+            }
+        } else {
+            // Addon mode: we append our preferences directly to the existing XMLs
+            // Write our preferences to existing morphe_prefs_icons.xml
+            document("res/xml/morphe_prefs_icons.xml").use { document ->
+                val morphePreferenceScreenNode = document.getNode("PreferenceScreen")
+                preferences.forEach { morphePreferenceScreenNode.addPreference(it) }
+            }
+
+            removeIconsAndLayout(preferences, false)
+            document("res/xml/morphe_prefs_icons_bold.xml").use { document ->
+                val morphePreferenceScreenNode = document.getNode("PreferenceScreen")
+                preferences.forEach { morphePreferenceScreenNode.addPreference(it) }
+            }
+
+            removeIconsAndLayout(preferences, true)
+            document("res/xml/morphe_prefs.xml").use { document ->
+                val morphePreferenceScreenNode = document.getNode("PreferenceScreen")
+                preferences.forEach { morphePreferenceScreenNode.addPreference(it) }
+            }
+        }
+
+        // Apply package name injection
         listOf("morphe_prefs.xml", "morphe_prefs_icons.xml", "morphe_prefs_icons_bold.xml", "settings_headers.xml").forEach { fileName ->
             val path = "res/xml/$fileName"
             if (get(path).exists()) {
@@ -204,13 +326,13 @@ private val settingsResourcePatch = resourcePatch {
     }
 }
 
-val settingsPatch = bytecodePatch(
+val prathxmSettingsPatch = bytecodePatch(
     description = "Adds settings for Morphe to YouTube Music.",
 ) {
     dependsOn(
         checkPatcherUpToDatePatch,
         sharedExtensionPatch,
-        settingsResourcePatch,
+        prathxmSettingsResourcePatch,
         addResourcesPatch,
         versionCheckPatch,
         removeLinkVerification,
@@ -224,49 +346,6 @@ val settingsPatch = bytecodePatch(
     )
 
     execute {
-        val isMainRepoDiscordPresent = try {
-            Class.forName("app.morphe.extension.music.discord.DiscordPatch")
-            true
-        } catch (e: ClassNotFoundException) {
-            false
-        }
-        if (isMainRepoDiscordPresent) {
-            return@execute
-        }
-
-        setAddResourceLocale(localesYouTube)
-        addAppResources("shared-youtube")
-        addAppResources("music")
-
-        // Add an "About" preference to the top.
-        preferences += NonInteractivePreference(
-            key = "morphe_settings_music_screen_0_about",
-            summaryKey = null,
-            icon = "@drawable/morphe_settings_screen_00_about",
-            iconBold = "@drawable/morphe_settings_screen_00_about_bold",
-            layout = "@layout/morphe_preference_with_icon",
-            tag = "app.morphe.extension.shared.settings.preference.about.MorpheAboutPreference",
-            selectable = true
-        )
-
-        PreferenceScreen.GENERAL.addPreferences(
-            SwitchPreference("morphe_settings_search_history"),
-            SwitchPreference("morphe_show_menu_icons")
-        )
-
-        PreferenceScreen.SCROBBLING.addPreferences()
-        PreferenceScreen.DISCORD_RPC.addPreferences()
-
-        PreferenceScreen.MISC.addPreferences(
-            TextPreference(
-                key = null,
-                titleKey = "morphe_pref_import_export_title",
-                summaryKey = "morphe_pref_import_export_summary",
-                inputType = InputType.TEXT_MULTI_LINE,
-                tag = "app.morphe.extension.shared.settings.preference.ImportExportPreference",
-            )
-        )
-
         var mainActivityHookClassDef: ClassDef? = null
         classDefForEach { classDef ->
             if (classDef.type == "Lapp/morphe/extension/music/settings/MusicActivityHook;") {
@@ -274,21 +353,47 @@ val settingsPatch = bytecodePatch(
             }
         }
 
-        if (mainActivityHookClassDef != null) {
-            val mutableClass = mutableClassDefBy(mainActivityHookClassDef!!)
-            val method = mainActivityHookClassDef!!.methods.firstOrNull { it.name == "initialize" }
-            if (method != null) {
-                val mutableMethod = mutableClass.findMutableMethodOf(method)
-                mutableMethod.addInstruction(0, "const-class v0, Lapp/morphe/extension/prathxmpatches/settings/Settings;")
-            }
-        } else {
+        setAddResourceLocale(localesYouTube)
+        addAppResources("shared-youtube")
+        addAppResources("music")
+
+        if (!isMainRepoPresent) {
+            // Standalone mode: add all preferences (About, General, Scrobbling, Discord, Misc)
+            preferences += NonInteractivePreference(
+                key = "morphe_settings_music_screen_0_about",
+                summaryKey = null,
+                icon = "@drawable/morphe_settings_screen_00_about",
+                iconBold = "@drawable/morphe_settings_screen_00_about_bold",
+                layout = "@layout/morphe_preference_with_icon",
+                tag = "app.morphe.extension.shared.settings.preference.about.MorpheAboutPreference",
+                selectable = true
+            )
+
+            PreferenceScreen.GENERAL.addPreferences(
+                SwitchPreference("morphe_settings_search_history"),
+                SwitchPreference("morphe_show_menu_icons")
+            )
+
+            PreferenceScreen.SCROBBLING.addPreferences()
+            PreferenceScreen.DISCORD_RPC.addPreferences()
+
+            PreferenceScreen.MISC.addPreferences(
+                TextPreference(
+                    key = null,
+                    titleKey = "morphe_pref_import_export_title",
+                    summaryKey = "morphe_pref_import_export_summary",
+                    inputType = InputType.TEXT_MULTI_LINE,
+                    tag = "app.morphe.extension.shared.settings.preference.ImportExportPreference",
+                )
+            )
+
+            // Setup standalone activity hijacking
             modifyActivityForSettingsInjection(
                 GoogleApiActivityOnCreateFingerprint,
                 MUSIC_ACTIVITY_HOOK_CLASS,
                 true
             )
 
-            // TODO: Implement a 'Spoof app version' patch for YouTube Music.
             if (is_8_40_or_greater) {
                 BoldIconsFeatureFlagFingerprint.let {
                     it.method.insertLiteralOverride(
@@ -296,6 +401,20 @@ val settingsPatch = bytecodePatch(
                         "$MUSIC_ACTIVITY_HOOK_CLASS->useBoldIcons(Z)Z"
                     )
                 }
+            }
+        } else {
+            // Addon mode: we only add Discord RPC (and Scrobbling if main repo doesn't have it)
+            if (!isMainRepoScrobblingPresent) {
+                PreferenceScreen.SCROBBLING.addPreferences()
+            }
+            PreferenceScreen.DISCORD_RPC.addPreferences()
+
+            // In addon mode, force-load our Settings class from the main repo's MusicActivityHook.initialize
+            val mutableClass = mutableClassDefBy(mainActivityHookClassDef!!)
+            val method = mainActivityHookClassDef!!.methods.firstOrNull { it.name == "initialize" }
+            if (method != null) {
+                val mutableMethod = mutableClass.findMutableMethodOf(method)
+                mutableMethod.addInstruction(0, "const-class v0, Lapp/morphe/extension/prathxmpatches/settings/Settings;")
             }
         }
     }
@@ -330,8 +449,6 @@ fun newIntent(settingsName: String) = IntentPreference.Intent(
 ) {
     getPatchedPackageName(MUSIC_PACKAGE_NAME)
 }
-
-
 
 object PreferenceScreen : BasePreferenceScreen() {
 
@@ -375,4 +492,3 @@ object PreferenceScreen : BasePreferenceScreen() {
         preferences += screen
     }
 }
-
