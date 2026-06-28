@@ -150,6 +150,24 @@ private val settingsResourcePatch = resourcePatch {
             }
         }
     }
+
+    finalize {
+        val packageName = document("AndroidManifest.xml").use { it.documentElement.getAttribute("package") }
+        listOf("morphe_prefs.xml", "morphe_prefs_icons.xml", "morphe_prefs_icons_bold.xml", "settings_headers.xml").forEach { fileName ->
+            val path = "res/xml/$fileName"
+            if (get(path).exists()) {
+                document(path).use { document ->
+                    val intents = document.getElementsByTagName("intent")
+                    for (i in 0 until intents.length) {
+                        val intent = intents.item(i) as Element
+                        if (intent.getAttribute("android:targetClass") == "com.google.android.gms.common.api.GoogleApiActivity") {
+                            intent.setAttribute("android:targetPackage", packageName)
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 val settingsPatch = bytecodePatch(
