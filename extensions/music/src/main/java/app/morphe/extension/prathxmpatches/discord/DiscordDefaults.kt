@@ -1,7 +1,7 @@
 package app.morphe.extension.prathxmpatches.discord
 
 object DiscordDefaults {
-    const val APP_ID = "1447278780795064401"
+    const val APP_ID = "1520675027337609226"
 
     const val YOUTUBE_WATCH_URL = "https://music.youtube.com/watch?v="
 
