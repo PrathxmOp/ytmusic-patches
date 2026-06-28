@@ -1,5 +1,5 @@
 {
-  "version": "1.37.3",
+  "version": "1.37.4",
   "patches": [
     {
       "name": "Change package name",
@@ -56,7 +56,8 @@
       "default": true,
       "dependencies": [
         "BytecodePatch",
-        "BytecodePatch"
+        "BytecodePatch",
+        "ResourcePatch"
       ],
       "compatiblePackages": [
         {
@@ -117,7 +118,8 @@
       "default": true,
       "dependencies": [
         "BytecodePatch",
-        "BytecodePatch"
+        "BytecodePatch",
+        "ResourcePatch"
       ],
       "compatiblePackages": [
         {

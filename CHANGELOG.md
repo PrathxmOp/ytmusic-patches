@@ -1,3 +1,9 @@
+## [1.37.4](https://github.com/PrathxmOp/ytmusic-patches/compare/v1.37.3...v1.37.4) (2026-06-28)
+
+### 🐛 Bug Fixes
+
+* **manifest:** isolate GoogleApiActivity registration to avoid class shadowing ([b626ba5](https://github.com/PrathxmOp/ytmusic-patches/commit/b626ba5eda2dd6c5bd9e3e66e9a22eadb7ad74f2))
+
 ## [1.37.3](https://github.com/PrathxmOp/ytmusic-patches/compare/v1.37.2...v1.37.3) (2026-06-28)
 
 ### 🐛 Bug Fixes
