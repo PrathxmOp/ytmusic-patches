@@ -1,3 +1,9 @@
+## [1.37.2](https://github.com/PrathxmOp/ytmusic-patches/compare/v1.37.1...v1.37.2) (2026-06-28)
+
+### 🐛 Bug Fixes
+
+* **settings:** register GoogleApiActivity in manifest to prevent crash ([ef81871](https://github.com/PrathxmOp/ytmusic-patches/commit/ef818714c7a821da4d661e71be859ce3253c3090))
+
 ## [1.37.1](https://github.com/PrathxmOp/ytmusic-patches/compare/v1.37.0...v1.37.1) (2026-06-28)
 
 ### 🐛 Bug Fixes
