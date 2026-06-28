@@ -1,3 +1,9 @@
+## [1.37.1](https://github.com/PrathxmOp/ytmusic-patches/compare/v1.37.0...v1.37.1) (2026-06-28)
+
+### 🐛 Bug Fixes
+
+* **settings:** dynamically resolve package name in preference xmls ([d90dcbb](https://github.com/PrathxmOp/ytmusic-patches/commit/d90dcbb6712eff3476bb55c655e4c9a59e0f4da3))
+
 ## [1.37.0](https://github.com/PrathxmOp/ytmusic-patches/compare/v1.36.3...v1.37.0) (2026-06-28)
 
 ### ✨ New Features
