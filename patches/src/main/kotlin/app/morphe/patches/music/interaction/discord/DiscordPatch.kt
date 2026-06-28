@@ -123,9 +123,6 @@ val discordRpcPatch = bytecodePatch(
         )
 
         MediaSessionSetPlaybackStateFingerprint.let {
-            java.io.File("/home/prathxm/Development/morphe-patches/matched_classes.txt").appendText(
-                "DiscordPatch: SetPlaybackState matched class: ${it.classDef.type}, method: ${it.method.name}\n"
-            )
             it.method.apply {
                 val index = it.instructionMatches.first().index
                 val register = getInstruction<FiveRegisterInstruction>(index).registerD
@@ -138,9 +135,6 @@ val discordRpcPatch = bytecodePatch(
         }
 
         MediaSessionSetMetadataFingerprint.let {
-            java.io.File("/home/prathxm/Development/morphe-patches/matched_classes.txt").appendText(
-                "DiscordPatch: SetMetadata matched class: ${it.classDef.type}, method: ${it.method.name}\n"
-            )
             it.method.apply {
                 val index = it.instructionMatches.first().index
                 val sessionRegister = getInstruction<FiveRegisterInstruction>(index).registerC
@@ -154,9 +148,6 @@ val discordRpcPatch = bytecodePatch(
         }
 
         MediaSessionSetQueueFingerprint.let {
-            java.io.File("/home/prathxm/Development/morphe-patches/matched_classes.txt").appendText(
-                "DiscordPatch: SetQueue matched class: ${it.classDef.type}, method: ${it.method.name}\n"
-            )
             it.method.apply {
                 val index = it.instructionMatches.first().index
                 val sessionRegister = getInstruction<FiveRegisterInstruction>(index).registerC
@@ -170,9 +161,6 @@ val discordRpcPatch = bytecodePatch(
         }
 
         VideoIdFingerprint.let {
-            java.io.File("/home/prathxm/Development/morphe-patches/matched_classes.txt").appendText(
-                "DiscordPatch: VideoId matched class: ${it.classDef.type}, method: ${it.method.name}\n"
-            )
             it.method.apply {
                 val index = it.instructionMatches[1].index
                 val videoIdRegister = getInstruction<OneRegisterInstruction>(index).registerA

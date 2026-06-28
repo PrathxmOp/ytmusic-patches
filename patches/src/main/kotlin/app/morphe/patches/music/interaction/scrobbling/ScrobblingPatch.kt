@@ -130,9 +130,6 @@ val scrobblingPatch = bytecodePatch(
         )
 
         MediaSessionSetPlaybackStateFingerprint.let {
-            java.io.File("/home/prathxm/Development/morphe-patches/matched_classes.txt").appendText(
-                "ScrobblingPatch: SetPlaybackState matched class: ${it.classDef.type}, method: ${it.method.name}\n"
-            )
             it.method.apply {
                 val index = it.instructionMatches.first().index
                 val register = getInstruction<FiveRegisterInstruction>(index).registerD
@@ -145,9 +142,6 @@ val scrobblingPatch = bytecodePatch(
         }
 
         MediaSessionSetMetadataFingerprint.let {
-            java.io.File("/home/prathxm/Development/morphe-patches/matched_classes.txt").appendText(
-                "ScrobblingPatch: SetMetadata matched class: ${it.classDef.type}, method: ${it.method.name}\n"
-            )
             it.method.apply {
                 val index = it.instructionMatches.first().index
                 val register = getInstruction<FiveRegisterInstruction>(index).registerD
