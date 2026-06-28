@@ -1,3 +1,9 @@
+## [1.37.0](https://github.com/PrathxmOp/ytmusic-patches/compare/v1.36.3...v1.37.0) (2026-06-28)
+
+### ✨ New Features
+
+* **settings:** support addon mode by conditionally loading Settings class in MusicActivityHook ([876a8ce](https://github.com/PrathxmOp/ytmusic-patches/commit/876a8cedc27461b957272be9b99359d07b4ff0c4))
+
 ## [1.36.3](https://github.com/PrathxmOp/ytmusic-patches/compare/v1.36.2...v1.36.3) (2026-06-28)
 
 ### 🐛 Bug Fixes
