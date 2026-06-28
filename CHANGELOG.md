@@ -1,3 +1,9 @@
+## [1.36.0](https://github.com/PrathxmOp/ytmusic-patches/compare/v1.35.0...v1.36.0) (2026-06-28)
+
+### ✨ New Features
+
+* remove FCM notifications from release workflow ([d4f7004](https://github.com/PrathxmOp/ytmusic-patches/commit/d4f70049ed9ea0086adac374c7db74473b9aea3b))
+
 ## [1.35.0](https://github.com/PrathxmOp/ytmusic-patches/compare/v1.34.2...v1.35.0) (2026-06-28)
 
 ### ✨ New Features

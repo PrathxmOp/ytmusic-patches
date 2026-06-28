@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-06-28T08:39:40",
-  "description": "## [1.35.0](https://github.com/PrathxmOp/ytmusic-patches/compare/v1.34.2...v1.35.0) (2026-06-28)\n\n### ✨ New Features\n\n* rename extension namespace to app.morphe.extension.prathxmpatches and update branding ([43704f5](https://github.com/PrathxmOp/ytmusic-patches/commit/43704f5df61edafeef80db783d623b391b24502c))",
-  "download_url": "https://github.com/PrathxmOp/ytmusic-patches/releases/download/v1.35.0/patches-1.35.0.mpp",
+  "created_at": "2026-06-28T08:45:19",
+  "description": "## [1.36.0](https://github.com/PrathxmOp/ytmusic-patches/compare/v1.35.0...v1.36.0) (2026-06-28)\n\n### ✨ New Features\n\n* remove FCM notifications from release workflow ([d4f7004](https://github.com/PrathxmOp/ytmusic-patches/commit/d4f70049ed9ea0086adac374c7db74473b9aea3b))",
+  "download_url": "https://github.com/PrathxmOp/ytmusic-patches/releases/download/v1.36.0/patches-1.36.0.mpp",
   "signature_download_url": "",
-  "version": "1.35.0"
+  "version": "1.36.0"
 }
