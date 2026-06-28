@@ -173,9 +173,6 @@ val discordRpcPatch = bytecodePatch(
 
         try {
             VideoIdBackgroundPlayFingerprint.let {
-                java.io.File("/home/prathxm/Development/morphe-patches/matched_classes.txt").appendText(
-                    "DiscordPatch: VideoIdBackgroundPlay matched class: ${it.classDef.type}, method: ${it.method.name}\n"
-                )
                 it.method.apply {
                     val index = it.instructionMatches.first().index
                     val videoIdRegister = getInstruction<OneRegisterInstruction>(index + 1).registerA
@@ -186,9 +183,7 @@ val discordRpcPatch = bytecodePatch(
                 }
             }
         } catch (e: Throwable) {
-            java.io.File("/home/prathxm/Development/morphe-patches/matched_classes.txt").appendText(
-                "DiscordPatch: VideoIdBackgroundPlay fingerprint failed to match (optional)\n"
-            )
+            // VideoIdBackgroundPlay fingerprint failed to match (optional)
         }
     }
 }
