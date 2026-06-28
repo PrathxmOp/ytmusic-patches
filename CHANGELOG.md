@@ -1,3 +1,9 @@
+## [1.34.0](https://github.com/PrathxmOp/ytmusic-patches/compare/v1.33.3...v1.34.0) (2026-06-28)
+
+### ✨ New Features
+
+* migrate and stabilize Discord Rich Presence and Scrobbling patches ([61925ad](https://github.com/PrathxmOp/ytmusic-patches/commit/61925ade5da192a3531a5538b693773628591eab))
+
 ## [1.33.3](https://github.com/PrathxmOp/ytmusic-patches/compare/v1.33.2...v1.33.3) (2026-06-26)
 
 ### 🐛 Bug Fixes
