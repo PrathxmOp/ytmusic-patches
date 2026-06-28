@@ -1,3 +1,9 @@
+## [1.34.1](https://github.com/PrathxmOp/ytmusic-patches/compare/v1.34.0...v1.34.1) (2026-06-28)
+
+### 🐛 Bug Fixes
+
+* remove host-specific debug file logging to prevent runtime crash ([867b1e6](https://github.com/PrathxmOp/ytmusic-patches/commit/867b1e64dcaafdc7e8bf0a4ba0ce81379552f885))
+
 ## [1.34.0](https://github.com/PrathxmOp/ytmusic-patches/compare/v1.33.3...v1.34.0) (2026-06-28)
 
 ### ✨ New Features
