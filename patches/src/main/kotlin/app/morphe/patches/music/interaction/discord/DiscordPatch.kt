@@ -29,7 +29,7 @@ import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.iface.instruction.FiveRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 
-private const val EXTENSION_CLASS = "Lapp/morphe/extension/music/discord/DiscordPatch;"
+private const val EXTENSION_CLASS = "Lapp/morphe/extension/prathxmpatches/discord/DiscordPatch;"
 
 private object VideoIdParentFingerprint : Fingerprint(
     accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
@@ -99,7 +99,7 @@ val discordRpcPatch = bytecodePatch(
                         key = "morphe_music_discord_rpc_token",
                         titleKey = "morphe_music_discord_rpc_token_title",
                         summaryKey = null,
-                        tag = "app.morphe.extension.music.settings.preference.DiscordTokenPreference",
+                        tag = "app.morphe.extension.prathxmpatches.settings.preference.DiscordTokenPreference",
                         selectable = true
                     )
                 )

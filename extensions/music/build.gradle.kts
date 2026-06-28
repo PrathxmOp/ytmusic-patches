@@ -17,7 +17,7 @@ dependencies {
 }
 
 configure<ApplicationExtension> {
-    namespace = "app.morphe.extension.music"
+    namespace = "app.morphe.extension.prathxmpatches"
     compileSdk = 36
 
     defaultConfig {

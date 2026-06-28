@@ -34,7 +34,7 @@ import com.android.tools.smali.dexlib2.iface.instruction.FiveRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.TwoRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.reference.FieldReference
 
-private const val EXTENSION_CLASS = "Lapp/morphe/extension/music/patches/scrobbling/ScrobblePatch;"
+private const val EXTENSION_CLASS = "Lapp/morphe/extension/prathxmpatches/patches/scrobbling/ScrobblePatch;"
 
 @Suppress("unused")
 val scrobblingPatch = bytecodePatch(
@@ -62,7 +62,7 @@ val scrobblingPatch = bytecodePatch(
                         key = "morphe_music_listenbrainz_token_ui",
                         titleKey = "morphe_music_listenbrainz_token_title",
                         summaryKey = null,
-                        tag = "app.morphe.extension.music.settings.preference.ListenBrainzTokenPreference",
+                        tag = "app.morphe.extension.prathxmpatches.settings.preference.ListenBrainzTokenPreference",
                         selectable = true
                     ),
                     SwitchPreference("morphe_music_listenbrainz_enabled"),
@@ -94,7 +94,7 @@ val scrobblingPatch = bytecodePatch(
                         key = "morphe_music_lastfm_token_ui",
                         titleKey = "morphe_music_lastfm_token_title",
                         summaryKey = null,
-                        tag = "app.morphe.extension.music.settings.preference.LastFMTokenPreference",
+                        tag = "app.morphe.extension.prathxmpatches.settings.preference.LastFMTokenPreference",
                         selectable = true
                     ),
                     SwitchPreference("morphe_music_lastfm_enabled"),

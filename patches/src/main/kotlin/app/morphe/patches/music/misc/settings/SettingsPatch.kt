@@ -39,7 +39,7 @@ import app.morphe.util.inputStreamFromBundledResource
 import app.morphe.util.insertLiteralOverride
 import org.w3c.dom.Element
 
-private const val MUSIC_ACTIVITY_HOOK_CLASS = "Lapp/morphe/extension/music/settings/MusicActivityHook;"
+private const val MUSIC_ACTIVITY_HOOK_CLASS = "Lapp/morphe/extension/prathxmpatches/settings/MusicActivityHook;"
 
 private val preferences = mutableSetOf<BasePreference>()
 
@@ -111,14 +111,14 @@ private val settingsResourcePatch = resourcePatch {
             var exists = false
             for (i in 0 until activities.length) {
                 val act = activities.item(i) as Element
-                if (act.getAttribute("android:name") == "app.morphe.extension.music.discord.DiscordOAuthActivity") {
+                if (act.getAttribute("android:name") == "app.morphe.extension.prathxmpatches.discord.DiscordOAuthActivity") {
                     exists = true
                     break
                 }
             }
             if (!exists) {
                 val activity = document.createElement("activity")
-                activity.setAttribute("android:name", "app.morphe.extension.music.discord.DiscordOAuthActivity")
+                activity.setAttribute("android:name", "app.morphe.extension.prathxmpatches.discord.DiscordOAuthActivity")
                 activity.setAttribute("android:exported", "true")
                 activity.setAttribute("android:launchMode", "singleTask")
 
