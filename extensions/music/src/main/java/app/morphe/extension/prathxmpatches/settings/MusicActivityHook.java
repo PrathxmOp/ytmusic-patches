@@ -8,7 +8,6 @@ import android.preference.PreferenceFragment;
 import android.view.View;
 import android.widget.Toolbar;
 
-import app.morphe.extension.prathxmpatches.patches.VersionCheckPatch;
 import app.morphe.extension.prathxmpatches.settings.preference.MusicPreferenceFragment;
 import app.morphe.extension.prathxmpatches.settings.search.MusicSearchViewController;
 import app.morphe.extension.shared.Logger;
@@ -27,8 +26,7 @@ public class MusicActivityHook extends BaseActivityHook {
     public static MusicSearchViewController searchViewController;
 
     // TODO: Implement a 'Spoof app version' patch for YouTube Music.
-    private static final boolean USE_BOLD_ICONS = Settings.SETTINGS_INITIALIZED.get()
-            && VersionCheckPatch.IS_8_40_OR_GREATER;
+    private static final boolean USE_BOLD_ICONS = false;
 
     static {
         Utils.setAppIsUsingBoldIcons(USE_BOLD_ICONS);
@@ -49,7 +47,7 @@ public class MusicActivityHook extends BaseActivityHook {
         // Must touch the Music settings to ensure the settings class is loaded and
         // the values can be found when setting the UI preferences.
         // Logging anything under non debug ensures this is set.
-        Logger.printInfo(() -> "Permanent repeat enabled: " + Settings.PERMANENT_REPEAT.get());
+        Logger.printInfo(() -> "Discord RPC enabled: " + Settings.DISCORD_RPC_ENABLED.get());
 
         // YT Music always uses dark mode.
         Utils.setIsDarkModeEnabled(true);
