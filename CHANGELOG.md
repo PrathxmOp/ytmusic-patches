@@ -1,3 +1,9 @@
+## [1.36.1](https://github.com/PrathxmOp/ytmusic-patches/compare/v1.36.0...v1.36.1) (2026-06-28)
+
+### 🐛 Bug Fixes
+
+* remove duplicate settings and unused classes to prevent duplicate key crash ([53c25e3](https://github.com/PrathxmOp/ytmusic-patches/commit/53c25e3fdf626095ff46b870ed4d9690aa7a2c6c))
+
 ## [1.36.0](https://github.com/PrathxmOp/ytmusic-patches/compare/v1.35.0...v1.36.0) (2026-06-28)
 
 ### ✨ New Features
