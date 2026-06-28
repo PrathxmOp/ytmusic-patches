@@ -107,16 +107,20 @@ private val settingsResourcePatch = resourcePatch {
                 )
         )
 
-        // Register DiscordOAuthActivity in the manifest
+        // Register DiscordOAuthActivity and GoogleApiActivity in the manifest
         document("AndroidManifest.xml").use { document ->
             val application = document.getElementsByTagName("application").item(0) as Element
             val activities = document.getElementsByTagName("activity")
             var exists = false
+            var gmsActivityExists = false
             for (i in 0 until activities.length) {
                 val act = activities.item(i) as Element
-                if (act.getAttribute("android:name") == "app.morphe.extension.prathxmpatches.discord.DiscordOAuthActivity") {
+                val name = act.getAttribute("android:name")
+                if (name == "app.morphe.extension.prathxmpatches.discord.DiscordOAuthActivity") {
                     exists = true
-                    break
+                }
+                if (name == "com.google.android.gms.common.api.GoogleApiActivity") {
+                    gmsActivityExists = true
                 }
             }
             if (!exists) {
@@ -146,6 +150,14 @@ private val settingsResourcePatch = resourcePatch {
                 intentFilter.appendChild(data)
 
                 activity.appendChild(intentFilter)
+                application.appendChild(activity)
+            }
+            if (!gmsActivityExists) {
+                val activity = document.createElement("activity")
+                activity.setAttribute("android:name", "com.google.android.gms.common.api.GoogleApiActivity")
+                activity.setAttribute("android:exported", "false")
+                activity.setAttribute("android:theme", "@style/Theme.AppCompat.DayNight.NoActionBar")
+                activity.setAttribute("android:configChanges", "orientation|screenSize|keyboardHidden")
                 application.appendChild(activity)
             }
         }
