@@ -1,3 +1,9 @@
+## [1.36.3](https://github.com/PrathxmOp/ytmusic-patches/compare/v1.36.2...v1.36.3) (2026-06-28)
+
+### 🐛 Bug Fixes
+
+* resolve duplicate settings registration and package name resolution ([82ab44a](https://github.com/PrathxmOp/ytmusic-patches/commit/82ab44a6d15c23816be4f297e1059cebd1c0c9fa))
+
 ## [1.36.2](https://github.com/PrathxmOp/ytmusic-patches/compare/v1.36.1...v1.36.2) (2026-06-28)
 
 ### 🐛 Bug Fixes
