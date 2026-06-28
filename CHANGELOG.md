@@ -1,3 +1,9 @@
+## [1.35.0](https://github.com/PrathxmOp/ytmusic-patches/compare/v1.34.2...v1.35.0) (2026-06-28)
+
+### ✨ New Features
+
+* rename extension namespace to app.morphe.extension.prathxmpatches and update branding ([43704f5](https://github.com/PrathxmOp/ytmusic-patches/commit/43704f5df61edafeef80db783d623b391b24502c))
+
 ## [1.34.2](https://github.com/PrathxmOp/ytmusic-patches/compare/v1.34.1...v1.34.2) (2026-06-28)
 
 ### 🐛 Bug Fixes
