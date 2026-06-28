@@ -1,3 +1,9 @@
+## [1.37.3](https://github.com/PrathxmOp/ytmusic-patches/compare/v1.37.2...v1.37.3) (2026-06-28)
+
+### 🐛 Bug Fixes
+
+* **settings:** ensure GoogleApiActivity is always registered even if addon patches are skipped ([16eec19](https://github.com/PrathxmOp/ytmusic-patches/commit/16eec1989613e167b387a02b5c08a62a67581ef3))
+
 ## [1.37.2](https://github.com/PrathxmOp/ytmusic-patches/compare/v1.37.1...v1.37.2) (2026-06-28)
 
 ### 🐛 Bug Fixes
