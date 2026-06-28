@@ -224,6 +224,22 @@ val settingsPatch = bytecodePatch(
     }
 }
 
+fun getPatchedPackageName(fallbackPackageName: String): String {
+    for (className in listOf(
+        "app.morphe.patches.music.misc.gms.Constants",
+        "app.morphe.patches.shared.misc.settings.SettingsPatchKt"
+    )) {
+        try {
+            val siblingClass = Class.forName(className)
+            val clazz = siblingClass.classLoader.loadClass("app.morphe.patches.all.misc.packagename.ChangePackageNamePatchKt")
+            val method = clazz.getMethod("setOrGetFallbackPackageName", String::class.java)
+            return method.invoke(null, fallbackPackageName) as String
+        } catch (e: Throwable) {
+        }
+    }
+    return setOrGetFallbackPackageName(fallbackPackageName)
+}
+
 /**
  * Creates an intent to open Morphe settings.
  */
@@ -231,17 +247,9 @@ fun newIntent(settingsName: String) = IntentPreference.Intent(
     data = settingsName,
     targetClass = "com.google.android.gms.common.api.GoogleApiActivity"
 ) {
-    // The package name change has to be reflected in the intent.
-    // Try to get the package name from the main morphe-patches classloader.
-    try {
-        val siblingClass = Class.forName("app.morphe.patches.music.shared.Constants")
-        val clazz = siblingClass.classLoader.loadClass("app.morphe.patches.all.misc.packagename.ChangePackageNamePatchKt")
-        val method = clazz.getMethod("setOrGetFallbackPackageName", String::class.java)
-        method.invoke(null, MUSIC_PACKAGE_NAME) as String
-    } catch (e: Throwable) {
-        setOrGetFallbackPackageName(MUSIC_PACKAGE_NAME)
-    }
+    getPatchedPackageName(MUSIC_PACKAGE_NAME)
 }
+
 
 
 object PreferenceScreen : BasePreferenceScreen() {

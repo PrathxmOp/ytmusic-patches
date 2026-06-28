@@ -106,9 +106,7 @@ object DiscordActivityBuilder {
         )
 
         Timber.tag(TAG).d(
-            "build: result — name=%s, type=%d, state=%s, details=%s, btn1=%s, btn2=%s",
-            result.name, result.activityType, result.state, result.details,
-            result.button1Label?.take(30), result.button2Label?.take(30),
+            "build: result — name=${result.name}, type=${result.activityType}, state=${result.state}, details=${result.details}, btn1=${result.button1Label?.take(30)}, btn2=${result.button2Label?.take(30)}"
         )
 
         return result
