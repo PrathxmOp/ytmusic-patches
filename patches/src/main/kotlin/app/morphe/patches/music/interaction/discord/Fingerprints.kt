@@ -4,7 +4,8 @@
  *
  * See the included NOTICE file for GPLv3 §7(b) and §7(c) terms that apply to this code.
  */
-package app.morphe.patches.music.interaction.listenbrainz
+
+package app.morphe.patches.music.interaction.discord
 
 import app.morphe.patcher.Fingerprint
 import app.morphe.patcher.methodCall
@@ -25,6 +26,16 @@ internal object MediaSessionSetMetadataFingerprint : Fingerprint(
             definingClass = "Landroid/media/session/MediaSession;",
             name = "setMetadata",
             parameters = listOf("Landroid/media/MediaMetadata;")
+        )
+    )
+)
+
+internal object MediaSessionSetQueueFingerprint : Fingerprint(
+    filters = listOf(
+        methodCall(
+            definingClass = "Landroid/media/session/MediaSession;",
+            name = "setQueue",
+            parameters = listOf("Ljava/util/List;")
         )
     )
 )
