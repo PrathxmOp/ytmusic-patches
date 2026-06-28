@@ -18,8 +18,11 @@ import android.util.Pair;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.RoundRectShape;
 
 import app.morphe.extension.prathxmpatches.discord.DiscordRpcManager;
 import app.morphe.extension.prathxmpatches.discord.DiscordTokenStore;
@@ -99,6 +102,61 @@ public class DiscordTokenPreference extends Preference {
         status.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
         status.setTextColor(Utils.getAppForegroundColor());
         status.setVisibility(View.GONE);
+
+        if (!loggedIn) {
+            TextView manualInstruction = new TextView(context);
+            manualInstruction.setText(str("morphe_music_discord_rpc_token_dialog_manual_message"));
+            manualInstruction.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+            manualInstruction.setTextColor(Utils.getAppForegroundColor());
+            LinearLayout.LayoutParams manualInstParams = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT);
+            manualInstParams.topMargin = Dim.dp16;
+            manualInstParams.bottomMargin = Dim.dp8;
+            content.addView(manualInstruction, manualInstParams);
+
+            final EditText urlInput = createThemedEditText(context);
+            urlInput.setHint(str("morphe_music_discord_rpc_token_dialog_manual_hint"));
+            urlInput.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13);
+            LinearLayout.LayoutParams inputParams = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT);
+            content.addView(urlInput, inputParams);
+
+            Button submitUrlBtn = CustomDialog.createButton(context, null,
+                    str("morphe_music_discord_rpc_token_dialog_manual_btn"),
+                    () -> {
+                        String url = urlInput.getText().toString().trim();
+                        if (url.isEmpty()) {
+                            showStatus(status, "Please enter the URL", STATUS_COLOR_ERROR);
+                            return;
+                        }
+                        android.net.Uri uri;
+                        try {
+                            uri = android.net.Uri.parse(url);
+                        } catch (Exception e) {
+                            showStatus(status, "Invalid URL format", STATUS_COLOR_ERROR);
+                            return;
+                        }
+                        String code = uri.getQueryParameter("code");
+                        String state = uri.getQueryParameter("state");
+                        if (code == null || code.isEmpty()) {
+                            showStatus(status, "Invalid URL (missing 'code')", STATUS_COLOR_ERROR);
+                            return;
+                        }
+                        
+                        showStatus(status, str("morphe_music_discord_rpc_token_status_linking"), Utils.getAppForegroundColor());
+                        boolean manualSuccess = app.morphe.extension.prathxmpatches.discord.DiscordOAuthActivity.Companion.completeManual(code, state != null ? state : "");
+                        if (!manualSuccess) {
+                            showStatus(status, "Please click 'Link Account' first to start the process", STATUS_COLOR_ERROR);
+                        }
+                    },
+                    false, false);
+            LinearLayout.LayoutParams submitParams = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT, Dim.dp36);
+            submitParams.topMargin = Dim.dp8;
+            content.addView(submitUrlBtn, submitParams);
+        }
 
         // We check if the activity is available for context, which must be GoogleApiActivity.
         Activity activity = null;
@@ -192,5 +250,19 @@ public class DiscordTokenPreference extends Preference {
         status.setText(text);
         status.setTextColor(color);
         status.setVisibility(View.VISIBLE);
+    }
+
+    private static EditText createThemedEditText(Context context) {
+        EditText editText = new EditText(context);
+        editText.setSingleLine(true);
+        editText.setTextSize(16);
+        editText.setTextColor(Utils.getAppForegroundColor());
+        ShapeDrawable background = new ShapeDrawable(new RoundRectShape(
+                Dim.roundedCorners(10), null, null));
+        background.getPaint().setColor(Utils.getEditTextBackground());
+        editText.setPadding(Dim.dp12, Dim.dp8, Dim.dp12, Dim.dp8);
+        editText.setBackground(background);
+        editText.setClipToOutline(true);
+        return editText;
     }
 }

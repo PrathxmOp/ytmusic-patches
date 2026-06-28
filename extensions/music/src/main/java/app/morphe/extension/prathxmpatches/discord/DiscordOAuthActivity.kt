@@ -36,6 +36,14 @@ class DiscordOAuthActivity : Activity() {
                 }
             }
         }
+
+        fun completeManual(code: String, state: String): Boolean {
+            val d = deferred
+            if (d == null || d.isCompleted) {
+                return false
+            }
+            return d.complete(AuthCodeResult(code, state))
+        }
     }
 
     private fun finishAndReturn() {

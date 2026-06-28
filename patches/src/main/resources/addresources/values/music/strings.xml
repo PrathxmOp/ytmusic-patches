@@ -42,6 +42,9 @@ Background Playback: To ensure presence updates continue reliably in the backgro
     <string name="morphe_music_discord_rpc_token_dialog_link_btn">Link Account</string>
     <string name="morphe_music_discord_rpc_token_dialog_logout_btn">Log Out</string>
     <string name="morphe_music_discord_rpc_token_dialog_cancel_btn">Cancel</string>
+    <string name="morphe_music_discord_rpc_token_dialog_manual_message">If the app doesn\'t open automatically after logging in, copy the browser\'s address bar URL and paste it below:</string>
+    <string name="morphe_music_discord_rpc_token_dialog_manual_hint">Paste morphediscord:// URL here</string>
+    <string name="morphe_music_discord_rpc_token_dialog_manual_btn">Paste &amp; Submit</string>
     <string name="morphe_music_discord_rpc_token_status_linking">Linking account...</string>
     <string name="morphe_music_discord_rpc_token_status_success">Account linked successfully!</string>
     <string name="morphe_music_discord_rpc_token_status_error">Failed to link account: %s</string>
