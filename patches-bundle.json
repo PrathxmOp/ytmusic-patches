@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-06-28T08:57:45",
-  "description": "## [1.36.1](https://github.com/PrathxmOp/ytmusic-patches/compare/v1.36.0...v1.36.1) (2026-06-28)\n\n### 🐛 Bug Fixes\n\n* remove duplicate settings and unused classes to prevent duplicate key crash ([53c25e3](https://github.com/PrathxmOp/ytmusic-patches/commit/53c25e3fdf626095ff46b870ed4d9690aa7a2c6c))",
-  "download_url": "https://github.com/PrathxmOp/ytmusic-patches/releases/download/v1.36.1/patches-1.36.1.mpp",
+  "created_at": "2026-06-28T09:08:57",
+  "description": "## [1.36.2](https://github.com/PrathxmOp/ytmusic-patches/compare/v1.36.1...v1.36.2) (2026-06-28)\n\n### 🐛 Bug Fixes\n\n* **settings:** resolve classloader-isolated package name crash ([8c9c2ce](https://github.com/PrathxmOp/ytmusic-patches/commit/8c9c2ce588d0219b9f73744735d96ccb1db1d6fa))",
+  "download_url": "https://github.com/PrathxmOp/ytmusic-patches/releases/download/v1.36.2/patches-1.36.2.mpp",
   "signature_download_url": "",
-  "version": "1.36.1"
+  "version": "1.36.2"
 }

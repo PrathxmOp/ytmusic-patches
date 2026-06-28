@@ -1,3 +1,9 @@
+## [1.36.2](https://github.com/PrathxmOp/ytmusic-patches/compare/v1.36.1...v1.36.2) (2026-06-28)
+
+### 🐛 Bug Fixes
+
+* **settings:** resolve classloader-isolated package name crash ([8c9c2ce](https://github.com/PrathxmOp/ytmusic-patches/commit/8c9c2ce588d0219b9f73744735d96ccb1db1d6fa))
+
 ## [1.36.1](https://github.com/PrathxmOp/ytmusic-patches/compare/v1.36.0...v1.36.1) (2026-06-28)
 
 ### 🐛 Bug Fixes
