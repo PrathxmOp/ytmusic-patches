@@ -62,6 +62,39 @@ private val settingsResourcePatch = resourcePatch {
     )
 
     execute {
+        // 1. Always register GoogleApiActivity if it is missing from the manifest
+        document("AndroidManifest.xml").use { document ->
+            val application = document.getElementsByTagName("application").item(0) as Element
+            val activities = document.getElementsByTagName("activity")
+            var gmsActivityExists = false
+            for (i in 0 until activities.length) {
+                val act = activities.item(i) as Element
+                if (act.getAttribute("android:name") == "com.google.android.gms.common.api.GoogleApiActivity") {
+                    gmsActivityExists = true
+                    break
+                }
+            }
+            if (!gmsActivityExists) {
+                val activity = document.createElement("activity")
+                activity.setAttribute("android:name", "com.google.android.gms.common.api.GoogleApiActivity")
+                activity.setAttribute("android:exported", "false")
+                activity.setAttribute("android:theme", "@style/Theme.AppCompat.DayNight.NoActionBar")
+                activity.setAttribute("android:configChanges", "orientation|screenSize|keyboardHidden")
+                application.appendChild(activity)
+            }
+        }
+
+        // 2. Check if the main repository already includes the Discord/Scrobble patches
+        val isMainRepoDiscordPresent = try {
+            Class.forName("app.morphe.extension.music.discord.DiscordPatch")
+            true
+        } catch (e: ClassNotFoundException) {
+            false
+        }
+        if (isMainRepoDiscordPresent) {
+            return@execute
+        }
+
         copyResources(
             "settings",
             ResourceGroup("drawable",
@@ -107,20 +140,17 @@ private val settingsResourcePatch = resourcePatch {
                 )
         )
 
-        // Register DiscordOAuthActivity and GoogleApiActivity in the manifest
+        // Register DiscordOAuthActivity in the manifest
         document("AndroidManifest.xml").use { document ->
             val application = document.getElementsByTagName("application").item(0) as Element
             val activities = document.getElementsByTagName("activity")
             var exists = false
-            var gmsActivityExists = false
             for (i in 0 until activities.length) {
                 val act = activities.item(i) as Element
                 val name = act.getAttribute("android:name")
                 if (name == "app.morphe.extension.prathxmpatches.discord.DiscordOAuthActivity") {
                     exists = true
-                }
-                if (name == "com.google.android.gms.common.api.GoogleApiActivity") {
-                    gmsActivityExists = true
+                    break
                 }
             }
             if (!exists) {
@@ -150,14 +180,6 @@ private val settingsResourcePatch = resourcePatch {
                 intentFilter.appendChild(data)
 
                 activity.appendChild(intentFilter)
-                application.appendChild(activity)
-            }
-            if (!gmsActivityExists) {
-                val activity = document.createElement("activity")
-                activity.setAttribute("android:name", "com.google.android.gms.common.api.GoogleApiActivity")
-                activity.setAttribute("android:exported", "false")
-                activity.setAttribute("android:theme", "@style/Theme.AppCompat.DayNight.NoActionBar")
-                activity.setAttribute("android:configChanges", "orientation|screenSize|keyboardHidden")
                 application.appendChild(activity)
             }
         }
@@ -202,6 +224,16 @@ val settingsPatch = bytecodePatch(
     )
 
     execute {
+        val isMainRepoDiscordPresent = try {
+            Class.forName("app.morphe.extension.music.discord.DiscordPatch")
+            true
+        } catch (e: ClassNotFoundException) {
+            false
+        }
+        if (isMainRepoDiscordPresent) {
+            return@execute
+        }
+
         setAddResourceLocale(localesYouTube)
         addAppResources("shared-youtube")
         addAppResources("music")

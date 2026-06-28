@@ -84,6 +84,16 @@ val discordRpcPatch = bytecodePatch(
     compatibleWith(COMPATIBILITY_YOUTUBE_MUSIC)
 
     execute {
+        val isMainRepoDiscordPresent = try {
+            Class.forName("app.morphe.extension.music.discord.DiscordPatch")
+            true
+        } catch (e: ClassNotFoundException) {
+            false
+        }
+        if (isMainRepoDiscordPresent) {
+            return@execute
+        }
+
         PreferenceScreen.DISCORD_RPC.addPreferences(
             NonInteractivePreference(
                 key = "morphe_music_discord_rpc_about",

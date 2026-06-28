@@ -49,6 +49,16 @@ val scrobblingPatch = bytecodePatch(
     compatibleWith(COMPATIBILITY_YOUTUBE_MUSIC)
 
     execute {
+        val isMainRepoScrobblePresent = try {
+            Class.forName("app.morphe.extension.music.patches.scrobbling.ScrobblePatch")
+            true
+        } catch (e: ClassNotFoundException) {
+            false
+        }
+        if (isMainRepoScrobblePresent) {
+            return@execute
+        }
+
         PreferenceScreen.SCROBBLING.addPreferences(
             NonInteractivePreference(
                 key = "morphe_music_scrobbling_about",
