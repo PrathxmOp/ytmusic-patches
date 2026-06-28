@@ -15,6 +15,7 @@ import app.morphe.patcher.patch.resourcePatch
 import app.morphe.patches.music.misc.extension.sharedExtensionPatch
 import app.morphe.patches.music.misc.settings.PreferenceScreen
 import app.morphe.patches.music.misc.settings.settingsPatch
+import app.morphe.patches.music.misc.settings.manifest.ytMusicSettingsManifestPatch
 import app.morphe.patches.music.shared.Constants.COMPATIBILITY_YOUTUBE_MUSIC
 import app.morphe.patches.shared.misc.settings.preference.NonInteractivePreference
 import app.morphe.patches.shared.misc.settings.preference.PreferenceCategory
@@ -43,7 +44,8 @@ val scrobblingPatch = bytecodePatch(
 ) {
     dependsOn(
         sharedExtensionPatch,
-        settingsPatch
+        settingsPatch,
+        ytMusicSettingsManifestPatch
     )
 
     compatibleWith(COMPATIBILITY_YOUTUBE_MUSIC)
