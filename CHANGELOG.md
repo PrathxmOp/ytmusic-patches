@@ -1,3 +1,9 @@
+## [1.34.2](https://github.com/PrathxmOp/ytmusic-patches/compare/v1.34.1...v1.34.2) (2026-06-28)
+
+### 🐛 Bug Fixes
+
+* remove remaining matched_classes.txt debug file writes ([012b764](https://github.com/PrathxmOp/ytmusic-patches/commit/012b764303505c638fff4132f0eadb3d4902739c))
+
 ## [1.34.1](https://github.com/PrathxmOp/ytmusic-patches/compare/v1.34.0...v1.34.1) (2026-06-28)
 
 ### 🐛 Bug Fixes
