@@ -1,3 +1,9 @@
+## [1.38.0](https://github.com/PrathxmOp/ytmusic-patches/compare/v1.37.4...v1.38.0) (2026-06-28)
+
+### ✨ New Features
+
+* **discord:** add manual callback URL fallback for root devices ([186d578](https://github.com/PrathxmOp/ytmusic-patches/commit/186d578ebd30c868965a29d28b4e3ea54a113793))
+
 ## [1.37.4](https://github.com/PrathxmOp/ytmusic-patches/compare/v1.37.3...v1.37.4) (2026-06-28)
 
 ### 🐛 Bug Fixes

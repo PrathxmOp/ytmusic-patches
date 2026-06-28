@@ -1,5 +1,5 @@
 {
-  "version": "1.37.4",
+  "version": "1.38.0",
   "patches": [
     {
       "name": "Change package name",
